@@ -9,7 +9,7 @@ import re
 nltk.download('stopwords')
 stpwrd = stopwords.words('english')
 
-def wizard_parser(file_path,question,chunk_size = 300, k=5):
+def wizard_parser(file_path,question,chunk_size = 300, k=3):
 
     #This function takes a pdf file path, a question, chunk size and a integer k and returns a list of k useful chunks from 
     # the pdf file that are at least in the size of chunk_size
@@ -64,7 +64,7 @@ def wizard_parser(file_path,question,chunk_size = 300, k=5):
     query_embedding = model.encode(question)
     passage_embeddings = model.encode(graph3)
     similarity = util.pytorch_cos_sim(query_embedding, passage_embeddings)
-    top = torch.topk(similarity,3)
+    top = torch.topk(similarity,k)
     indices = top.indices.squeeze().tolist()
     tert = [graph3[i] for i in indices]
     return tert,len(graph3)
