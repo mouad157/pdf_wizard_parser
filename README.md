@@ -1,4 +1,6 @@
-# pdf wizard parser
+# PDF Wizard Parser
+
+the PDF Wizard Parser uses a heuristic method to parse the text from a pdf file that is 100x faster than a semantic chunker.
 
 to use the pdf parser you can run the following code:
 
