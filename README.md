@@ -24,7 +24,9 @@ Install the required dependencies:
 pip install -r requirements.txt
 ```
 ### Functions
-semantic_chunker(text)
+
+```semantic_chunker(text)```
+
 Splits the input text into semantically meaningful chunks using a HuggingFace-based embedding model.
 
 ##### Parameters
@@ -36,6 +38,9 @@ Splits the input text into semantically meaningful chunks using a HuggingFace-ba
 text = "This is a long piece of text. It will be split into meaningful chunks."
 chunks = semantic_chunker(text)
 print(chunks)
+```
+
+```
 wizard_chunker(texts, chunk_size=300)
 ```
 Processes a given text into chunks based on sentence structure and a minimum chunk size.
@@ -49,9 +54,12 @@ Processes a given text into chunks based on sentence structure and a minimum chu
 text = "This is the first sentence.\nThis is the second sentence.\nThis is the third sentence."
 chunks = wizard_chunker(text, chunk_size=50)
 print(chunks)
-wizard_parser(file_path, question, chunk_size=300, k=5)
-Parses a PDF file to extract relevant chunks of text based on a user-provided question.
 ```
+
+```
+wizard_parser(file_path, question, chunk_size=300, k=5)
+```
+Parses a PDF file to extract relevant chunks of text based on a user-provided question.
 ##### Parameters
 - file_path (str): Path to the PDF file.
 - question (str): The question or query to filter relevant chunks.
