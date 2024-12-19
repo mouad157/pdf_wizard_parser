@@ -23,20 +23,57 @@ Install the required dependencies:
 ```
 pip install -r requirements.txt
 ```
+### Functions
+semantic_chunker(text)
+Splits the input text into semantically meaningful chunks using a HuggingFace-based embedding model.
 
-to use the pdf parser you can run the following code:
-
+##### Parameters
+- text (str): The text to be chunked.
+##### Returns
+- list: A list of semantically meaningful chunks of text.
+##### Example
+```
+text = "This is a long piece of text. It will be split into meaningful chunks."
+chunks = semantic_chunker(text)
+print(chunks)
+wizard_chunker(texts, chunk_size=300)
+```
+Processes a given text into chunks based on sentence structure and a minimum chunk size.
+##### Parameters
+- texts (str): The input text to process.
+- chunk_size (int, optional): The minimum number of tokens in each chunk. Default is 300.
+##### Returns
+- list: A list of text chunks.
+##### Example
+```
+text = "This is the first sentence.\nThis is the second sentence.\nThis is the third sentence."
+chunks = wizard_chunker(text, chunk_size=50)
+print(chunks)
+wizard_parser(file_path, question, chunk_size=300, k=5)
+Parses a PDF file to extract relevant chunks of text based on a user-provided question.
+```
+##### Parameters
+- file_path (str): Path to the PDF file.
+- question (str): The question or query to filter relevant chunks.
+- chunk_size (int, optional): Minimum size of text chunks. Default is 300.
+- k (int, optional): Number of top relevant chunks to return. Default is 5.
+##### Returns
+- list: A list of the top k relevant text chunks.
+- int: Total number of chunks generated.
+##### Example
+```
+file_path = "sample.pdf"
+question = "What is the topic of the second section?"
+relevant_chunks, total_chunks, duration = wizard_parser(file_path, question)
+print(f"Top chunks: {relevant_chunks}")
+print(f"Total chunks generated: {total_chunks}")
+print(f"Processing time: {duration:.2f} seconds")
+```
 
 ### Usage
 
-1. to use the pdf parser you can run the following code:
 
-```
-from util import wizard_parser
-list_of_context = wizzard_parser("example.pdf","Where is Singapore?", chunksize = 400, k = 5)
-```
-
-1 - Run the script using the command-line interface to use the wizard pdf chunker:
+1. Run the script using the command-line interface to use the wizard pdf chunker:
 
 ```
 python wizard_pdf_chunker.py -f path/to/your/file.pdf -o output_folder -c chunk_size
@@ -58,7 +95,7 @@ The script will create the folder ```output_chunks``` (if it doesn’t already e
 
 
 
-2 - Run the script using the command-line interface to use the semantic pdf chunker for comparison:
+2. Run the script using the command-line interface to use the semantic pdf chunker for comparison:
 
 ```
 python semantic_pdf_chunker.py -f path/to/your/file.pdf -o output_folder -c chunk_size
