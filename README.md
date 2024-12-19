@@ -10,7 +10,7 @@ list_of_context = wizzard_parser("example.pdf","Where is Singapore?", chunksize 
 ```
 ### Usage
 
-- Run the script using the command-line interface to use the wizard pdf chunker:
+1 - Run the script using the command-line interface to use the wizard pdf chunker:
 
 ```
 python wizard_pdf_chunker.py -f path/to/your/file.pdf -o output_folder -c chunk_size
@@ -31,7 +31,8 @@ Process a file named ```sample.pdf``` with a chunk size of 300 tokens, saving th
 The script will create the folder ```output_chunks``` (if it doesn’t already exist) and save chunks as ```chunk_1.txt```, ```chunk_2.txt```, and so on.
 
 
-- Run the script using the command-line interface to use the semantic pdf chunker for comparison:
+
+2 - Run the script using the command-line interface to use the semantic pdf chunker for comparison:
 
 ```
 python semantic_pdf_chunker.py -f path/to/your/file.pdf -o output_folder -c chunk_size
@@ -39,8 +40,8 @@ python semantic_pdf_chunker.py -f path/to/your/file.pdf -o output_folder -c chun
 
 ##### Arguments
 
-```-f``` or ```--file``` (required): Path to the PDF file to process.
-```-o``` or ```--output``` (optional): Directory where the text chunks will be saved. Defaults to chunks.
+- ```-f``` or ```--file``` (required): Path to the PDF file to process.
+- ```-o``` or ```--output``` (optional): Directory where the text chunks will be saved. Defaults to chunks.
 
 ##### Example
 
