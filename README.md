@@ -1,14 +1,40 @@
 # PDF Wizard Parser
+**PDF Wizard Chunker** uses a heuristic method to parse the text from a pdf file that is 100x faster than a semantic chunker.
+ This tool is useful for preprocessing large documents for text analysis, machine learning, or other data processing tasks.
 
-the PDF Wizard Parser uses a heuristic method to parse the text from a pdf file that is 100x faster than a semantic chunker.
+### Features
+
+- Extracts text from PDF files while ignoring page headers and footers.
+- Splits the text into semantically meaningful chunks.
+- Saves each chunk as an individual .txt file.
+- Configurable chunk size via a command-line flag.
+- Simple and intuitive command-line interface.
+
+### Installation
+
+Clone the repository:
+```
+git clone https://github.com/mouad157/pdf_wizard_parser/
+cd pdf_wizard_parser
+```
+
+Install the required dependencies:
+
+```
+pip install -r requirements.txt
+```
 
 to use the pdf parser you can run the following code:
+
+
+### Usage
+
+1. to use the pdf parser you can run the following code:
 
 ```
 from util import wizard_parser
 list_of_context = wizzard_parser("example.pdf","Where is Singapore?", chunksize = 400, k = 5)
 ```
-### Usage
 
 1 - Run the script using the command-line interface to use the wizard pdf chunker:
 
@@ -45,7 +71,7 @@ python semantic_pdf_chunker.py -f path/to/your/file.pdf -o output_folder -c chun
 
 ##### Example
 
-Process a file named ```sample.pdf``` with a chunk size of 300 tokens, saving the output in the ```output_chunks``` folder:
+Process a file named ```sample.pdf``` , saving the output in the ```output_chunks``` folder:
 
 ```python semantic_pdf_chunker.py -f sample.pdf -o output_chunks -c 300```
 
