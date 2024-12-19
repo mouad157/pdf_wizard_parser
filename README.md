@@ -71,10 +71,9 @@ Parses a PDF file to extract relevant chunks of text based on a user-provided qu
 ```
 file_path = "sample.pdf"
 question = "What is the topic of the second section?"
-relevant_chunks, total_chunks, duration = wizard_parser(file_path, question)
+relevant_chunks, total_chunks= wizard_parser(file_path, question)
 print(f"Top chunks: {relevant_chunks}")
 print(f"Total chunks generated: {total_chunks}")
-print(f"Processing time: {duration:.2f} seconds")
 ```
 
 ### Usage
@@ -121,12 +120,9 @@ Process a file named ```sample.pdf``` , saving the output in the ```output_chunk
 
 The script will create the folder ```output_chunks``` (if it doesn’t already exist) and save chunks as ```chunk_1.txt```, ```chunk_2.txt```, and so on.
 
-
-
-
+### Demo
 
 to run the demo run the following code:
-
 
 ```
 streamlit run demo.py
