@@ -38,7 +38,7 @@ def pdf_to_text(file_path):
     cleaned_text = re.sub(r'\n\s*\n', '\n\n', re.sub(r' +', ' ', total_text))
     return cleaned_text, pages_text
 
-def parse_with_semantic_chunker(text):
+def semantic_chunker(text):
     """
     Splits the text into semantically meaningful chunks using a HuggingFace-based chunker.
     
@@ -50,9 +50,10 @@ def parse_with_semantic_chunker(text):
     """
     embeddings = HuggingFaceEmbeddings()
     text_splitter = SemanticChunker(embeddings)
-    return text_splitter.create_documents([text])
+    docs = text_splitter.create_documents([text])
+    return [doc.page_content for doc in docs]
 
-def parse_my_way(texts, chunk_size=300):
+def wizard_chunker(texts, chunk_size=300):
     """
     Processes a given text into chunks based on sentence content and a minimum chunk size.
 
@@ -70,16 +71,18 @@ def parse_my_way(texts, chunk_size=300):
     for sentence in sentences:
         tokens = word_tokenize(sentence)
         if not tokens:
+            current_chunk.append(sentence)
             continue
 
         # Filter out stopwords and check if words qualify
         filtered_words = [word for word in tokens if word not in stpwrd]
         if len(filtered_words) > 1 and all(word[0].isupper() or word[0].isdigit() for word in filtered_words):
             # Add sentence to the current chunk
-            current_chunk.append(sentence)
             if sum(len(word_tokenize(sent)) for sent in current_chunk) >= chunk_size:
                 chunks.append("\n".join(current_chunk))
                 current_chunk = []
+            current_chunk.append(sentence)
+            
         else:
             current_chunk.append(sentence)
     
@@ -153,11 +156,11 @@ def wizard_parser(file_path,question,chunk_size = 300, k=5):
 if __name__ == '__main__':
     text,_ = pdf_to_text("./wdg.pdf")
     start_time = time.time()
-    chunks = parse_with_semantic_chunker(text)
+    chunks = semantic_chunker(text)
     duration = time.time() - start_time
     print(duration)
     start_time2 = time.time()
-    chunks2 = parse_my_way(text)
+    chunks2 = wizard_chunker(text)
     duration2 = time.time() - start_time2
     print(duration2)
     print(len(chunks),len(chunks2))
