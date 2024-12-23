@@ -10,10 +10,13 @@ def pdf_to_chunks(pdf_file, output_folder):
         pdf_file (str): Path to the PDF file.
         output_folder (str): Directory where chunks will be saved.
     """
-    text = pdf_to_text(pdf_file)
+    text,_ = pdf_to_text(pdf_file)
     chunks = semantic_chunker(text)
 
     # Save chunks to separate .txt files
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+    
     for i, chunk in enumerate(chunks):
         file_name = os.path.join(output_folder, f"chunk_{i+1}.txt")
         with open(file_name, "w", encoding="utf-8") as f:

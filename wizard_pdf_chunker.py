@@ -12,9 +12,12 @@ def pdf_to_chunks(pdf_file, output_folder, chunk_size=300):
         chunk_size (int): Minimum number of tokens per chunk.
     """
 
-    text = pdf_to_text(pdf_file)
+    text,_ = pdf_to_text(pdf_file)
     chunks = wizard_chunker(text,chunk_size=chunk_size)
     # Save chunks to separate .txt files
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+        
     for i, chunk in enumerate(chunks):
         file_name = os.path.join(output_folder, f"chunk_{i+1}.txt")
         with open(file_name, "w", encoding="utf-8") as f:

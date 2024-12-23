@@ -12,6 +12,7 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 
 # Ensure required NLTK data is downloaded
 nltk.download('stopwords')
+nltk.download('punkt_tab')
 stpwrd = stopwords.words('english')
 
 def pdf_to_text(file_path):
